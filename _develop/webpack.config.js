@@ -118,7 +118,11 @@ const baseConfig = {
     alias: {
       parchment: path.resolve(
         __dirname,
-        '../node_modules/parchment/src/parchment',
+        '../node_modules/@shortwave/parchment/src/parchment',
+      ),
+      'quill-delta': path.resolve(
+        __dirname,
+        '../node_modules/@shortwave/quill-delta',
       ),
     },
     extensions: ['.js', '.styl', '.ts'],
