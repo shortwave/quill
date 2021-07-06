@@ -21,32 +21,35 @@ class History extends Module {
     );
     this.quill.keyboard.addBinding(
       { key: 'z', shortKey: true },
-      this.undo.bind(this),
+      () => !this.undo(),
     );
     this.quill.keyboard.addBinding(
       { key: 'z', shortKey: true, shiftKey: true },
-      this.redo.bind(this),
+      () => !this.redo(),
     );
     if (/Win/i.test(navigator.platform)) {
       this.quill.keyboard.addBinding(
         { key: 'y', shortKey: true },
-        this.redo.bind(this),
+        () => !this.redo(),
       );
     }
 
     this.quill.root.addEventListener('beforeinput', event => {
       if (event.inputType === 'historyUndo') {
-        this.undo();
-        event.preventDefault();
+        if (this.undo()) {
+          event.preventDefault();
+        }
       } else if (event.inputType === 'historyRedo') {
-        this.redo();
-        event.preventDefault();
+        if (this.redo()) {
+          event.preventDefault();
+        }
       }
     });
   }
 
+  /** Return true if a change happened. */
   change(source, dest) {
-    if (this.stack[source].length === 0) return;
+    if (this.stack[source].length === 0) return false;
     const delta = this.stack[source].pop();
     const base = this.quill.getContents();
     const inverseDelta = delta.invert(base);
@@ -57,6 +60,7 @@ class History extends Module {
     this.ignoreChange = false;
     const index = getLastChangeIndex(this.quill.scroll, delta);
     this.quill.setSelection(index);
+    return true;
   }
 
   clear() {
@@ -89,7 +93,7 @@ class History extends Module {
   }
 
   redo() {
-    this.change('redo', 'undo');
+    return this.change('redo', 'undo');
   }
 
   transform(delta) {
@@ -98,7 +102,7 @@ class History extends Module {
   }
 
   undo() {
-    this.change('undo', 'redo');
+    return this.change('undo', 'redo');
   }
 }
 History.DEFAULTS = {
