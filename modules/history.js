@@ -21,28 +21,38 @@ class History extends Module {
     );
     this.quill.keyboard.addBinding(
       { key: 'z', shortKey: true },
-      () => !this.undo(),
+      (ctx) => {
+        if (this.undo()) {
+          ctx.event.stopPropagation();
+        }
+      },
     );
     this.quill.keyboard.addBinding(
       { key: 'z', shortKey: true, shiftKey: true },
-      () => !this.redo(),
+      (ctx) => {
+        if (this.redo()) {
+          ctx.event.stopPropagation();
+        }
+      },
     );
     if (/Win/i.test(navigator.platform)) {
       this.quill.keyboard.addBinding(
         { key: 'y', shortKey: true },
-        () => !this.redo(),
+        (ctx) => {
+          if (this.redo()) {
+            ctx.event.stopPropagation();
+          }
+        }
       );
     }
 
     this.quill.root.addEventListener('beforeinput', event => {
       if (event.inputType === 'historyUndo') {
-        if (this.undo()) {
-          event.preventDefault();
-        }
+        this.undo();
+        event.preventDefault();
       } else if (event.inputType === 'historyRedo') {
-        if (this.redo()) {
-          event.preventDefault();
-        }
+        this.redo();
+        event.preventDefault();
       }
     });
   }
