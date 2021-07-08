@@ -42,7 +42,7 @@ class History extends Module {
           if (this.redo()) {
             ctx.event.stopPropagation();
           }
-        }
+        },
       );
     }
 
