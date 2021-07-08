@@ -21,7 +21,7 @@ class History extends Module {
     );
     this.quill.keyboard.addBinding(
       { key: 'z', shortKey: true },
-      (ctx) => {
+      (_range, ctx) => {
         if (this.undo()) {
           ctx.event.stopPropagation();
         }
@@ -29,7 +29,7 @@ class History extends Module {
     );
     this.quill.keyboard.addBinding(
       { key: 'z', shortKey: true, shiftKey: true },
-      (ctx) => {
+      (_range, ctx) => {
         if (this.redo()) {
           ctx.event.stopPropagation();
         }
@@ -38,7 +38,7 @@ class History extends Module {
     if (/Win/i.test(navigator.platform)) {
       this.quill.keyboard.addBinding(
         { key: 'y', shortKey: true },
-        (ctx) => {
+        (_range, ctx) => {
           if (this.redo()) {
             ctx.event.stopPropagation();
           }
