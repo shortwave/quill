@@ -1,5 +1,4 @@
 .*
-!.npmrc
 /dist
 /node_modules
 /selenium
@@ -7,3 +6,4 @@
 /src
 *.d.ts
 *.log
+shortwave-quill-*.tgz
