@@ -8,6 +8,7 @@
 
 ## Releases
 
+To make a release preform the following steps:
 
 ```shell
 # Edit version in package.json
