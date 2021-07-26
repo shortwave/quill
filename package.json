@@ -1,6 +1,6 @@
 {
   "name": "@shortwave/quill",
-  "version": "2.0.0-dev.7",
+  "version": "2.0.0-dev.8",
   "description": "Your powerful, rich text editor",
   "author": "Jason Chen <jhchen7@gmail.com>",
   "homepage": "http://quilljs.com",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@shortwave/parchment": "https://github.com/shortwave/parchment/releases/download/v2.0.0-dev.2/shortwave-parchment-2.0.0-dev.2.tgz",
-    "@shortwave/quill-delta": "https://github.com/shortwave/delta/releases/download/v4.2.2/shortwave-quill-delta-4.2.2.tgz",
+    "@shortwave/quill-delta": "https://github.com/shortwave/delta/releases/download/v4.2.3/shortwave-quill-delta-4.2.3.tgz",
     "eventemitter3": "^4.0.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.isequal": "^4.5.0",
