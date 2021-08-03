@@ -13,7 +13,8 @@ To make a release preform the following steps:
 ```shell
 # Edit version in package.json
 npm pack
-gh release create $VERSION shortwave-quill-$VERSION.tgz
+VERSION=`cat package.json | jq -r '.version'` \
+  gh release create $VERSION shortwave-quill-$VERSION.tgz
 ```
 
 ## License
