@@ -17,15 +17,23 @@ EVENTS.forEach(eventName => {
 });
 
 class Emitter extends EventEmitter {
-  constructor() {
+  constructor(debug = false) {
     super();
+    this.debug = debug;
+    this.callDepth = 0;
     this.listeners = {};
     this.on('error', debug.error);
   }
 
   emit(...args) {
     debug.log.call(debug, ...args);
+    if (this.debug && ++this.callDepth > 1000) {
+      throw new Error("Too deep of call depth in emitter!");
+    }
     super.emit(...args);
+    if (this.debug) {
+      --this.callDepth;
+    }
   }
 
   handleDOM(event, ...args) {

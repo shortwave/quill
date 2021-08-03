@@ -78,7 +78,7 @@ class Quill {
     this.root = this.addContainer('ql-editor');
     this.root.classList.add('ql-blank');
     this.scrollingContainer = this.options.scrollingContainer || this.root;
-    this.emitter = new Emitter();
+    this.emitter = new Emitter(!!this.options.debug);
     const ScrollBlot = this.options.registry.query(
       Parchment.ScrollBlot.blotName,
     );
