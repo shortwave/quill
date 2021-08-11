@@ -27,8 +27,19 @@ class History extends Module {
         }
       },
     );
+    // On MacOS the case doesn't change with shift
     this.quill.keyboard.addBinding(
       { key: 'z', shortKey: true, shiftKey: true },
+      (_range, ctx) => {
+        if (this.redo()) {
+          ctx.event.stopPropagation();
+        }
+      },
+    );
+    // On Windows the case **does** change with shift. We should probably use
+    // code instead of key.
+    this.quill.keyboard.addBinding(
+      { key: 'Z', shortKey: true, shiftKey: true },
       (_range, ctx) => {
         if (this.redo()) {
           ctx.event.stopPropagation();
