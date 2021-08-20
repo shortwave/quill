@@ -5,7 +5,9 @@
   "author": "Jason Chen <jhchen7@gmail.com>",
   "homepage": "http://quilljs.com",
   "module": "dist/quill.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "config": {
     "ports": {
       "proxy": "9000",
@@ -15,8 +17,8 @@
     }
   },
   "dependencies": {
-    "@shortwave/parchment": "https://github.com/shortwave/parchment/releases/download/v2.0.0-dev.2/shortwave-parchment-2.0.0-dev.2.tgz",
-    "@shortwave/quill-delta": "https://github.com/shortwave/delta/releases/download/4.2.3/shortwave-quill-delta-4.2.3.tgz",
+    "@shortwave/parchment": "2.0.0",
+    "@shortwave/quill-delta": "4.2.4",
     "eventemitter3": "^4.0.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.isequal": "^4.5.0",
@@ -52,6 +54,7 @@
     "karma-sauce-launcher": "^4.1.2",
     "lodash": "^4.17.15",
     "mini-css-extract-plugin": "~0.9.0",
+    "np": "^7.5.0",
     "prettier": "^1.17.0",
     "puppeteer": "^2.1.1",
     "style-loader": "~1.1.3",
@@ -139,7 +142,8 @@
     "build:webpack": "webpack --config _develop/webpack.config.js; rm dist/quill.core dist/quill.bubble dist/quill.snow",
     "build:release": "./_develop/scripts/release.sh",
     "build:esnext": "rm -rf dist/* && cp -R quill.js core.js blots core formats modules themes ui dist && jscodeshift --transform=_develop/shortwave-transform.js dist/**/*.js && stylus assets/core.styl -o dist/core.css",
-    "prepack": "npm run lint && npm run build:esnext",
+    "prepare": "npm run lint && npm run build:esnext",
+    "release": "np --test-script test:unit",
     "develop": "npm run start",
     "lint": "eslint blots core formats modules themes ui test",
     "start": "npm run build:webpack; bundle exec foreman start -f _develop/procfile",
@@ -151,7 +155,7 @@
     "travis": "npm run lint && karma start _develop/karma.config.js --reporters dots,saucelabs"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "keywords": [
     "editor",

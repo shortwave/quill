@@ -6,6 +6,13 @@ import Toolbar from '../../../modules/toolbar';
 import Snow from '../../../themes/snow';
 import { Range } from '../../../core/selection';
 
+Quill.register(
+  {
+    'themes/snow': Snow,
+  },
+  true,
+);
+
 describe('Quill', function() {
   it('imports', function() {
     Object.keys(Quill.imports).forEach(function(path) {
