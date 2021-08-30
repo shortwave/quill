@@ -1,13 +1,5 @@
 import Quill from '../../../core/quill';
 import { addControls } from '../../../modules/toolbar';
-import SnowTheme from '../../../themes/snow';
-
-Quill.register(
-  {
-    'themes/snow': SnowTheme,
-  },
-  true,
-);
 
 describe('Toolbar', function() {
   describe('add controls', function() {

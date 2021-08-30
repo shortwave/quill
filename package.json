@@ -4,7 +4,7 @@
   "description": "Your powerful, rich text editor",
   "author": "Jason Chen <jhchen7@gmail.com>",
   "homepage": "http://quilljs.com",
-  "module": "dist/quill.js",
+  "module": "dist/shortwave.js",
   "files": [
     "dist"
   ],
@@ -141,7 +141,7 @@
     "build": "npm run lint && npm run build:webpack",
     "build:webpack": "webpack --config _develop/webpack.config.js; rm dist/quill.core dist/quill.bubble dist/quill.snow",
     "build:release": "./_develop/scripts/release.sh",
-    "build:esnext": "rm -rf dist/* && cp -R quill.js core.js blots core formats modules themes ui dist && jscodeshift --transform=_develop/shortwave-transform.js dist/**/*.js && stylus assets/core.styl -o dist/core.css",
+    "build:esnext": "rm -rf dist/* && cp -R shortwave.js core.js blots core formats modules themes ui dist && jscodeshift --transform=_develop/shortwave-transform.js dist/**/*.js && stylus assets/core.styl -o dist/core.css",
     "prepare": "npm run lint && npm run build:esnext",
     "release": "np --test-script test:unit",
     "develop": "npm run start",
