@@ -114,7 +114,7 @@ class Selection {
       this.scroll.query(format, Scope.BLOCK)
     )
       return;
-    if (nativeRange.start.node !== this.cursor.textNode) {
+    if (![this.cursor.textNode, this.cursor.domNode].includes(nativeRange.start.node)) {
       const blot = this.scroll.find(nativeRange.start.node, false);
       if (blot == null) return;
       // TODO Give blot ability to not split

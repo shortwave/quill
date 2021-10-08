@@ -10,14 +10,14 @@
   ],
   "config": {
     "ports": {
-      "proxy": "9000",
-      "jekyll": "4000",
+      "proxy": "9051",
+      "jekyll": "4051",
       "karma": "9876",
       "webpack": "9080"
     }
   },
   "dependencies": {
-    "@shortwave/parchment": "2.0.0",
+    "@shortwave/parchment": "^2.0.1",
     "@shortwave/quill-delta": "^4.2.5",
     "eventemitter3": "^4.0.0",
     "lodash.clonedeep": "^4.5.0",
