@@ -35,9 +35,6 @@ const CLIPBOARD_CONFIG = [
   ['ol, ul', matchList],
   ['pre', matchCodeBlock],
   ['tr', matchTable],
-  ['b', matchAlias.bind(matchAlias, 'bold')],
-  ['i', matchAlias.bind(matchAlias, 'italic')],
-  ['strike', matchAlias.bind(matchAlias, 'strike')],
   ['style', matchIgnore],
 ];
 
@@ -336,10 +333,6 @@ function traverse(scroll, node, elementMatchers, textMatchers, nodeMatches) {
     }, new Delta());
   }
   return new Delta();
-}
-
-function matchAlias(format, node, delta) {
-  return applyFormat(delta, format, true);
 }
 
 function matchAttributor(node, delta, scroll) {

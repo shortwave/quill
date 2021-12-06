@@ -215,6 +215,18 @@ describe('Clipboard', function() {
       );
     });
 
+    it('style overrides', function() {
+      const html =
+        '<b style="font-weight: normal;"><span>one </span><span style="font-weight: bold;">two</span><span> three</span></b>';
+      const delta = this.clipboard.convert({ html });
+      expect(delta).toEqual(
+        new Delta()
+          .insert('one ')
+          .insert('two', { bold: true })
+          .insert(' three'),
+      );
+    });
+
     it('nested list', function() {
       const delta = this.clipboard.convert({
         html: '<ol><li>One</li><li class="ql-indent-1">Alpha</li></ol>',
