@@ -1,6 +1,9 @@
+import Delta from 'quill-delta';
+
 import Selection, { Range } from '../../../core/selection';
 import Cursor from '../../../blots/cursor';
 import Emitter from '../../../core/emitter';
+import Editor from '../../../core/editor';
 
 describe('Selection', function() {
   beforeEach(function() {
@@ -632,12 +635,13 @@ describe('Selection', function() {
     });
 
     it('empty container', function() {
-      const selection = this.initialize(
-        Selection,
+      const [editor, selection] = this.initialize(
+        [Editor, Selection],
         '<table><tr><td data-row="a">a</td></tr></table>',
       );
-      this.quill.updateContents([{ retain: 1 }, { insert: '\n' }]);
+      editor.applyDelta(new Delta([{ retain: 1 }, { insert: '\n' }]));
       expect(selection.getBounds(2, 0)).toEqual(null);
+      this.bounds = selection.getBounds(0, 1);
     });
   });
 });
