@@ -217,7 +217,7 @@ describe('Clipboard', function() {
 
     it('style overrides', function() {
       const html =
-        '<b style="font-weight: normal;"><span>one </span><span style="font-weight: bold;">two</span><span> three</span></pre>';
+        '<b style="font-weight: normal;"><span>one </span><span style="font-weight: bold;">two</span><span> three</span></b>';
       const delta = this.clipboard.convert({ html });
       expect(delta).toEqual(
         new Delta()
