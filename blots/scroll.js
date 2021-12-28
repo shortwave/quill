@@ -180,6 +180,24 @@ class Scroll extends ScrollBlot {
       this.emitter.emit(Emitter.events.SCROLL_UPDATE, source, mutations);
     }
   }
+
+  getDebugDomPath(el) {
+    const stack = [];
+    while (el.parentNode != null && el !== this.domNode.parentNode) {
+      if (el.hasAttribute('id') && el.id !== '') {
+        stack.unshift(`${el.nodeName.toLowerCase()}#${el.id}`);
+      } else if (el.hasAttribute('class') && el.classList.length > 0) {
+        stack.unshift(`${el.nodeName.toLowerCase()}.${Array.from(el.classList).join(".")}`);
+      } else if (el.parentNode.childNodes.length > 1) {
+        const sibIndex = Array.from(el.parentNode.childNodes).indexOf(el);
+        stack.unshift(`${el.nodeName.toLowerCase()}:sibling-index(${sibIndex})`);
+      } else {
+        stack.unshift(el.nodeName.toLowerCase());
+      }
+      el = el.parentNode;
+    }
+    return stack;
+  }
 }
 Scroll.blotName = 'scroll';
 Scroll.className = 'ql-editor';

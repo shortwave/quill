@@ -121,14 +121,20 @@ class Selection {
     ) {
       const blot = this.scroll.find(nativeRange.start.node, false);
       if (blot == null) return;
-      // TODO Give blot ability to not split
-      if (blot instanceof LeafBlot) {
+      if (blot === this.cursor) {
+        // In this case we should just apply the format and update, there is no moving of the cursor that is needed.
+        // This **should** never happen, based on the above
+        debug.error(`blot returned was the cursor (${this.cursor}), which shouldn't happen (we check for before this).
+                     Native Range's node path: ${this.scroll.getDebugDomPath(nativeRange.start.node)}.
+                     Cursor's node path: ${this.scroll.getDebugDomPath(this.cursor.domNode)}`);
+      } else if (blot instanceof LeafBlot) {
         const after = blot.split(nativeRange.start.offset);
         blot.parent.insertBefore(this.cursor, after);
+        this.cursor.attach();
       } else {
         blot.insertBefore(this.cursor, nativeRange.start.node); // Should never happen
+        this.cursor.attach();
       }
-      this.cursor.attach();
     }
     this.cursor.format(format, value);
     this.scroll.optimize();
@@ -429,5 +435,6 @@ function contains(parent, descendant) {
   }
   return parent.contains(descendant);
 }
+
 
 export { Range, Selection as default };
