@@ -124,9 +124,17 @@ class Selection {
       if (blot === this.cursor) {
         // In this case we should just apply the format and update, there is no moving of the cursor that is needed.
         // This **should** never happen, based on the above
-        debug.error(`blot returned was the cursor (${this.cursor}), which shouldn't happen (we check for before this).
-                     Native Range's node path: ${this.scroll.getDebugDomPath(nativeRange.start.node)}.
-                     Cursor's node path: ${this.scroll.getDebugDomPath(this.cursor.domNode)}`);
+        const error = `blot returned was the cursor (${
+          this.cursor
+        }), which shouldn't happen (we check for before this).
+                     Native Range's node path: ${this.scroll.getDebugDomPath(
+                       nativeRange.start.node,
+                     )}.
+                     Cursor's node path: ${this.scroll.getDebugDomPath(
+                       this.cursor.domNode,
+                     )}`;
+        debug.error(error);
+        throw new Error(error); // Temporary throw to get error reporting on this error.
       } else if (blot instanceof LeafBlot) {
         const after = blot.split(nativeRange.start.offset);
         blot.parent.insertBefore(this.cursor, after);
@@ -222,7 +230,7 @@ class Selection {
     if (!range.native.collapsed) {
       positions.push([range.end.node, range.end.offset]);
     }
-    const indexes = positions.map(position => {
+    const indexes = positions.map((position) => {
       const [node, offset] = position;
       const blot = this.scroll.find(node, true);
       const index = blot.offset(this.scroll);
@@ -254,7 +262,7 @@ class Selection {
       end: { node: nativeRange.endContainer, offset: nativeRange.endOffset },
       native: nativeRange,
     };
-    [range.start, range.end].forEach(position => {
+    [range.start, range.end].forEach((position) => {
       let { node, offset } = position;
       while (!(node instanceof Text) && node.childNodes.length > 0) {
         if (node.childNodes.length > offset) {
@@ -435,6 +443,5 @@ function contains(parent, descendant) {
   }
   return parent.contains(descendant);
 }
-
 
 export { Range, Selection as default };

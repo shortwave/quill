@@ -15,7 +15,7 @@ class Scroll extends ScrollBlot {
     this.batch = false;
     this.optimize();
     this.enable();
-    this.domNode.addEventListener('dragstart', e => this.handleDragStart(e));
+    this.domNode.addEventListener('dragstart', (e) => this.handleDragStart(e));
   }
 
   batchStart() {
@@ -187,10 +187,14 @@ class Scroll extends ScrollBlot {
       if (el.hasAttribute('id') && el.id !== '') {
         stack.unshift(`${el.nodeName.toLowerCase()}#${el.id}`);
       } else if (el.hasAttribute('class') && el.classList.length > 0) {
-        stack.unshift(`${el.nodeName.toLowerCase()}.${Array.from(el.classList).join(".")}`);
+        stack.unshift(
+          `${el.nodeName.toLowerCase()}.${Array.from(el.classList).join('.')}`,
+        );
       } else if (el.parentNode.childNodes.length > 1) {
         const sibIndex = Array.from(el.parentNode.childNodes).indexOf(el);
-        stack.unshift(`${el.nodeName.toLowerCase()}:sibling-index(${sibIndex})`);
+        stack.unshift(
+          `${el.nodeName.toLowerCase()}:sibling-index(${sibIndex})`,
+        );
       } else {
         stack.unshift(el.nodeName.toLowerCase());
       }
