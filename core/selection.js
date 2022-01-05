@@ -36,7 +36,7 @@ class Selection {
       if (!this.hasFocus()) return;
       const native = this.getNativeRange();
       if (native == null) return;
-      if (native.start.node === this.cursor.textNode) return; // cursor.restore() will handle
+      if (this.isCursorDomNode(native.start.node)) return; // cursor.restore() will handle
       this.emitter.once(Emitter.events.SCROLL_UPDATE, () => {
         try {
           if (
@@ -114,11 +114,7 @@ class Selection {
       this.scroll.query(format, Scope.BLOCK)
     )
       return;
-    if (
-      ![this.cursor.textNode, this.cursor.domNode].includes(
-        nativeRange.start.node,
-      )
-    ) {
+    if (!this.isCursorDomNode(nativeRange.start.node)) {
       const blot = this.scroll.find(nativeRange.start.node, false);
       if (blot == null) return;
       if (blot === this.cursor) {
@@ -408,7 +404,7 @@ class Selection {
         !this.composing &&
         nativeRange != null &&
         nativeRange.native.collapsed &&
-        nativeRange.start.node !== this.cursor.textNode
+        !this.isCursorDomNode(nativeRange.start.node)
       ) {
         const range = this.cursor.restore();
         if (range) {
@@ -431,6 +427,10 @@ class Selection {
         this.emitter.emit(...args);
       }
     }
+  }
+
+  isCursorDomNode(node) {
+    return [this.cursor.textNode, this.cursor.domNode].includes(node);
   }
 }
 
