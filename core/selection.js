@@ -133,6 +133,39 @@ class Selection {
         throw new Error(error); // Temporary throw to get error reporting on this error.
       } else if (blot instanceof LeafBlot) {
         const after = blot.split(nativeRange.start.offset);
+        if (after === this.cursor) {
+          const error = `blot ${
+            blot.statics.blotName
+          } (${this.scroll.getDebugDomPath(
+            blot.domNode,
+          )}) returned the cursor, after being split.
+                     Blot's next child: ${
+                       blot.next
+                         ? `${
+                             blot.next.statics.blotName
+                           } - ${this.scroll.getDebugDomPath(
+                             blot.next.domNode,
+                           )}`
+                         : null
+                     }
+                     Blot's prev child: ${
+                       blot.prev
+                         ? `${
+                             blot.prev.statics.blotName
+                           } - ${this.scroll.getDebugDomPath(
+                             blot.prev.domNode,
+                           )}`
+                         : null
+                     }
+                     Native Range's node path: ${this.scroll.getDebugDomPath(
+                       nativeRange.start.node,
+                     )}.
+                     Cursor's node path: ${this.scroll.getDebugDomPath(
+                       this.cursor.domNode,
+                     )}`;
+          debug.error(error);
+          throw new Error(error); // Temporary throw to get error reporting on this error.
+        }
         blot.parent.insertBefore(this.cursor, after);
         this.cursor.attach();
       } else {
