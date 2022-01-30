@@ -232,8 +232,8 @@ class Keyboard extends Module {
       const [next] = this.quill.getLine(range.index + 1);
       if (next) {
         const curFormats = line.formats();
-        const nextFormats = this.quill.getFormat(range.index, 1);
-        formats = AttributeMap.diff(curFormats, nextFormats) || {};
+        const nextFormats = next.formats();
+        formats = AttributeMap.diff(nextFormats, curFormats) || {};
         if (Object.keys(formats).length > 0) {
           delta = delta.retain(next.length() - 1).retain(1, formats);
         }
