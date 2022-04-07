@@ -184,9 +184,9 @@ class Scroll extends ScrollBlot {
   getDebugDomPath(el) {
     const stack = [];
     while (el.parentNode != null && el !== this.domNode.parentNode) {
-      if (el.hasAttribute('id') && el.id !== '') {
+      if (el instanceof HTMLElement && el.hasAttribute('id') && el.id !== '') {
         stack.unshift(`${el.nodeName.toLowerCase()}#${el.id}`);
-      } else if (el.hasAttribute('class') && el.classList.length > 0) {
+      } else if (el instanceof HTMLElement && el.hasAttribute('class') && el.classList.length > 0) {
         stack.unshift(
           `${el.nodeName.toLowerCase()}.${Array.from(el.classList).join('.')}`,
         );
