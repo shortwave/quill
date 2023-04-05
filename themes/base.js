@@ -1,4 +1,4 @@
-import merge from 'lodash.merge';
+import merge from 'lodash/merge';
 import Emitter from '../core/emitter';
 import Theme from '../core/theme';
 import ColorPicker from '../ui/color-picker';

@@ -1,6 +1,6 @@
 import cloneDeep from 'lodash.clonedeep';
 import isEqual from 'lodash.isequal';
-import merge from 'lodash.merge';
+import merge from 'lodash/merge';
 import Delta, { AttributeMap, Op } from 'quill-delta';
 import { LeafBlot, Scope } from 'parchment';
 import { Range } from './selection';

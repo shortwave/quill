@@ -1,6 +1,6 @@
 import Delta from 'quill-delta';
 import cloneDeep from 'lodash.clonedeep';
-import merge from 'lodash.merge';
+import merge from 'lodash/merge';
 import * as Parchment from 'parchment';
 import Editor from './editor';
 import Emitter from './emitter';
