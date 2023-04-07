@@ -4,7 +4,8 @@ import { CHAPTER, P1, P2 } from './utils/fixtures';
 import QuillPage from './utils/QuillPage';
 
 test('compose an epic', async ({ page }) => {
-  await page.goto('http://localhost:9000/standalone/full');
+  const port = parseInt(process.env.npm_package_config_ports_proxy, 10);
+  await page.goto(`http://localhost:${port}/standalone/full`);
   const quillPage = new QuillPage(page);
   await page.waitForSelector('.ql-editor', { timeout: 10000 });
   await expect(page).toHaveTitle('Full Editor - Quill Rich Text Editor');

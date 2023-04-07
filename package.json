@@ -12,7 +12,7 @@
   "config": {
     "ports": {
       "proxy": "9051",
-      "jekyll": "4051",
+      "gatsby": "4000",
       "karma": "9876",
       "webpack": "9080"
     }
@@ -102,7 +102,6 @@
     "website:serve": "npm run serve -w website -- --port $npm_package_config_ports_gatsby",
     "website:develop": "npm run develop -w website -- --port $npm_package_config_ports_gatsby",
     "test": "npm run test:unit; npm run test:random",
-    "test:all": "npm run test:unit; npm run test:functional; npm run test:random",
     "test:e2e": "npx playwright test",
     "test:unit": "npm run build; karma start _develop/karma.config.js",
     "test:unit:ci": "npm run build; karma start _develop/karma.config.js --reporters dots,saucelabs",
