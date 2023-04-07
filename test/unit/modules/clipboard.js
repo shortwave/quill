@@ -215,6 +215,7 @@ describe('Clipboard', function() {
       );
     });
 
+<<<<<<< HEAD
     it('style overrides', function() {
       const html =
         '<b style="font-weight: normal;"><span>one </span><span style="font-weight: bold;">two</span><span> three</span></b>';
@@ -224,6 +225,13 @@ describe('Clipboard', function() {
           .insert('one ')
           .insert('two', { bold: true })
           .insert(' three'),
+=======
+    it('pre with \\n node', function() {
+      const html = '<pre><span> 01 </span>\n<span> 23 </span></pre>';
+      const delta = this.clipboard.convert({ html });
+      expect(delta).toEqual(
+        new Delta().insert(' 01 \n 23 \n', { 'code-block': true }),
+>>>>>>> upstream/develop
       );
     });
 

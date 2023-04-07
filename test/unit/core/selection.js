@@ -667,6 +667,7 @@ describe('Selection', function() {
         this.bounds = selection.getBounds(0, 10);
       }).not.toThrow();
     });
+<<<<<<< HEAD
 
     it('empty container', function() {
       const [editor, selection] = this.initialize(
@@ -677,5 +678,7 @@ describe('Selection', function() {
       expect(selection.getBounds(2, 0)).toEqual(null);
       this.bounds = selection.getBounds(0, 1);
     });
+=======
+>>>>>>> upstream/develop
   });
 });
